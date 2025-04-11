@@ -1,0 +1,18 @@
+.section {
+  background-image: url(./../../public/main.png);
+  position: relative;
+  height: 100vh;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+}
+.section .header {
+  position: sticky;
+}
+
+.image {
+  width: 100vw;
+  height: auto;
+  display: block;
+  max-width: 100%;
+}/*# sourceMappingURL=MainPage.css.map */

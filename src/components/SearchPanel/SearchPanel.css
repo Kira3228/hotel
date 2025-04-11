@@ -1,0 +1,22 @@
+.search-panel {
+  display: flex;
+  background-color: white;
+  width: 98%;
+  margin: auto;
+  height: 200px;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 16px;
+}
+
+.search-panel {
+  display: flex;
+  flex-direction: column;
+}
+.search-panel__data {
+  display: flex;
+  justify-content: space-between;
+}
+.search-panel .button {
+  margin: 50px 0px 10px 0px;
+}/*# sourceMappingURL=SearchPanel.css.map */

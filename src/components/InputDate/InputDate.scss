@@ -1,0 +1,47 @@
+/* CustomDatepicker.scss */
+@import './../../variables';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.datepicker-container {
+	font-family: 'Montserrat', sans-serif;
+	padding: 5px;
+	position: relative;
+	background-color: #fff;
+	width: 150px;
+    height: 30px;
+	border-radius: 5px;
+	border: 2px solid #1c1b1f;
+	display: flex;
+	align-items: center;
+
+	&.active-date .label {
+		transform: translateY(-15px) scale(0.75);
+		color: #1c1b1f;
+	}
+	.image {
+		height: 20px;
+		width: 20px;
+		margin-right: 10px;
+	}
+}
+.label {
+	position: absolute;
+	padding: 3px;
+	left: 10px;
+	top: 5px;
+	transition: all 0.2s;
+	pointer-events: none;
+	background-color: #ffffff;
+	z-index: 2;
+}
+.input-date {
+	width: 100%;
+	padding: 8px 0;
+	border: none;
+	border-bottom: 1px solid #ccc;
+
+	&:focus {
+		outline: none;
+		border-bottom-color: #1976d2;
+	}
+}

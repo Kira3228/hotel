@@ -1,0 +1,14 @@
+.main-layout header {
+  position: absolute;
+  background: transparent;
+}
+
+.default-layout header {
+  position: static;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.default-layout main {
+  padding-top: 80px;
+}/*# sourceMappingURL=Layout.css.map */

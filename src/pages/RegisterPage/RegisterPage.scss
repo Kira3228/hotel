@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+.register-form {
+	font-family: 'Montserrat', sans-serif;
+	width: 766px;
+	height: 665px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 25px;
+	margin: auto auto auto auto;
+	-webkit-box-shadow: 0px 0px 100px -7px rgba(34, 60, 80, 0.56);
+	-moz-box-shadow: 0px 0px 100px -7px rgba(34, 60, 80, 0.56);
+	box-shadow: 0px 0px 100px -7px rgba(34, 60, 80, 0.56);
+	z-index: 2; /* Родитель будет выше */
+	overflow: hidden; /* Обрезает содержимое, выходящее за границы */
+}
+.sec {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: end;
+	gap: 10px;
+	span {
+		font-size: 3rem;
+	}
+}

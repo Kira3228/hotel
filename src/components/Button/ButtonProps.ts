@@ -3,4 +3,5 @@ export type ButtonType = {
 	color?: 'none' | 'white' | 'blue'
 	children: React.ReactNode
 	className?: string
+	type: 'submit' | 'button'
 }

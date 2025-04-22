@@ -13,7 +13,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
 	return (
 		<div>
 			<Header isTransparent={isMainPage} />
-			<main>{children}</main>
+			<main className='main'>{children}</main>
 		</div>
 	)
 }

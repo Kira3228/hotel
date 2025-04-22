@@ -6,8 +6,15 @@ type HeaderType = {
 	className?: string
 	isTransparent?: boolean
 }
-export const Header: React.FC<HeaderType> = ({ color, className }) => {
+export const Header: React.FC<HeaderType> = ({
+	color,
+	className,
+	isTransparent,
+}) => {
 	const combinedClassName = `header ${color} ${className}`
+	if (!isTransparent) {
+		return null
+	}
 	return (
 		<>
 			<header className={combinedClassName}>

@@ -1,6 +1,13 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-.register-form {
+.register {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.register .register-form {
   font-family: "Montserrat", sans-serif;
   width: 766px;
   height: 665px;
@@ -14,14 +21,13 @@
   z-index: 2; /* Родитель будет выше */
   overflow: hidden; /* Обрезает содержимое, выходящее за границы */
 }
-
-.sec {
+.register .sec {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: end;
+  align-items: center;
   gap: 10px;
 }
-.sec span {
+.register .sec span {
   font-size: 3rem;
 }/*# sourceMappingURL=RegisterPage.css.map */

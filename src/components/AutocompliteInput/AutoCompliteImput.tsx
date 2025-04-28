@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './AutoCompliteImput.scss'
-import svg from './../../public/booking-svg.svg'
+import svg from '/booking-svg.svg'
 
 type AutoCompleteInputProps = {
 	value: string

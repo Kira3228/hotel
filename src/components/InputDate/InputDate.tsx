@@ -1,7 +1,7 @@
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import './InputDate.scss'
-import calendar from './../../public/calendar.svg'
+import calendar from '/calendar.svg'
 import React from 'react'
 
 type InputDateProps = {

@@ -4,4 +4,5 @@ export type ButtonType = {
 	children: React.ReactNode
 	className?: string
 	type: 'submit' | 'button'
+	onClick?: () => void
 }

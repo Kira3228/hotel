@@ -4,8 +4,9 @@ import './App.css'
 import { MainPage } from './pages/MainPage/MainPage'
 import { Route, Routes } from 'react-router-dom'
 import { RegisterPage } from './pages/RegisterPage/RegisterPage'
-import { Header } from './components/Header/Header'
 import { Layout } from './components/Layout/Layout'
+import { LoginPage } from './pages/LoginPage/LoginPage'
+import { RoomList } from './pages/RoomList/RoomList'
 
 const App: React.FC = () => {
 	return (
@@ -16,6 +17,7 @@ const App: React.FC = () => {
 					element={
 						<Layout>
 							<MainPage />
+							{/* <RoomList/> */}
 						</Layout>
 					}
 				></Route>
@@ -27,6 +29,16 @@ const App: React.FC = () => {
 						</Layout>
 					}
 				/>
+				<Route
+				path='login'
+				element ={
+					<Layout>
+						<LoginPage/>
+					</Layout>
+				}/>
+				<Route
+				path='room-list'
+				element = {<RoomList/>}/>
 			</Routes>
 		</>
 	)

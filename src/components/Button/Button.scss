@@ -1,5 +1,5 @@
+@use './../../variables' as vars;
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-@import './../../variables';
 .btn {
 	font-family: 'Montserrat', sans-serif;
 	font-optical-sizing: auto;
@@ -8,8 +8,8 @@
 	height: 53px;
 	border-radius: 5px;
 	border: none;
-	background-color: $primary-color;
-	color: $none-color;
+	background-color: vars.$primary-color;
+	color: vars.$none-color;
 	cursor: pointer;
 	&:hover{
 

@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { Button } from '../../components/Button/Button'
 import './RegisterPage.scss'
 import { AutoCompleteInput } from '../../components/AutocompliteInput/AutoCompliteImput'
-import { UserRegistrationDto } from '../../types/UserRegistration.dto'
+import { UserRegistrationDto } from '../../types/dto/UserRegistration.dto'
+import { Link, useNavigate } from 'react-router-dom'
 
 export const RegisterPage: React.FC = () => {
 	const [formData, setFormData] = useState<UserRegistrationDto>({
@@ -13,41 +14,40 @@ export const RegisterPage: React.FC = () => {
 		email: '',
 		password: '',
 	})
-
+	const navigate = useNavigate()
 	const handleInputChange = (fieldName: string, value: string) => {
 		setFormData(prev => ({
 			...prev,
 			[fieldName]: value,
 		}))
 	}
-	const test:UserRegistrationDto = {
-		firstName: 'Кирилл',
-		middleName: 'Александрович',
-		lastName: 'Воронцов',
-		email: 'hanzomein2@gmail.com',
-		password: 'qwertyasdfgh',
-		phone: '89229038716'
-	}
-	
+
 	const handleSubmit = async (e: React.FormEvent) => {
-		console.log(formData)
-		e.preventDefault();
-		try{
+		console.log('Отправка данных', formData)
+		e.preventDefault()
+		try {
 			const response = await fetch('http://localhost:3000/auth/registration', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify(test),
+				body: JSON.stringify(formData),
 			})
-			if(!response.ok){
-				throw new Error('Ошибка при регистрации');
+			if (!response.ok) {
+				throw new Error('Ошибка при регистрации')
 			}
 			const data = await response.json()
 			console.log('Успешная регистрация', data)
-		}
-		catch(error) 
-		{
+
+			if (data.access_token) {
+				localStorage.setItem('access_token', data.access_token)
+				console.log('Токен сохранён в localStorage')
+				navigate('/')
+			} else {
+				console.log('В ответе нет access_token')
+			}
+
+		} catch (error) {
 			console.log('Ошибка:', error)
 		}
 	}
@@ -97,6 +97,9 @@ export const RegisterPage: React.FC = () => {
 						Зарегистрироваться
 					</Button>
 				</div>
+				<Link to='/login'>
+					<span>Уже есть аккаунт? Войдите!</span>
+				</Link>
 			</form>
 		</div>
 	)

@@ -7,12 +7,13 @@ export const Button: React.FC<ButtonType> = ({
 	color,
 	size,
 	type,
+	onClick
 }) => {
 	const combinedClassName = `btn ${size} ${color} ${className}`.trim()
 	if (type === 'button') {
 		return (
 			<>
-				<button className={combinedClassName}>{children}</button>
+				<button onClick={onClick} className={combinedClassName}>{children}</button>
 			</>
 		)
 	}

@@ -1,4 +1,4 @@
-@import './../../variables';
+@use './../../variables' as vars;
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 .header {
 	display: flex;
@@ -8,6 +8,10 @@
 	width: 100%;
 	padding: 0 40px 0 40px;
 	box-sizing: border-box;
+	nav{
+		display: flex;
+		
+	}
 	&__logo {
 		.name {
 			font-family: 'Montserrat', sans-serif;
@@ -24,8 +28,8 @@
 }
 
 .blue {
-	background-color: $primary-color;
+	background-color: vars.$primary-color;
 }
 .none {
-	background-color: $none-color;
+	background-color: vars.$none-color;
 }

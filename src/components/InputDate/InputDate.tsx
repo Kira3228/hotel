@@ -1,30 +1,37 @@
 import DatePicker from 'react-datepicker'
-import './InputDate.scss'
-import { useState } from 'react'
 import 'react-datepicker/dist/react-datepicker.css'
+import './InputDate.scss'
 import calendar from './../../public/calendar.svg'
+import React from 'react'
 
-export const InputDate: React.FC = () => {
-	const [startDate, setStartDate] = useState<Date | null>(null)
-	const [isFocus, setIsFocus] = useState(false)
+type InputDateProps = {
+	value: string
+	onChange: (value: string) => void
+	label: string
+}
+
+export const InputDate: React.FC<InputDateProps> = ({ value, onChange, label }) => {
+	const parsedDate = value ? new Date(value) : null
+	const [isFocus, setIsFocus] = React.useState(false)
 
 	return (
 		<div
 			className={`datepicker-container ${
-				isFocus || startDate ? 'active-date' : ''
+				isFocus || value ? 'active-date' : ''
 			}`}
 		>
-			<label className='label'>Введите </label>
+			<label className='label'>{label}</label>
 			<DatePicker
 				className='input-date'
-				selected={startDate}
-				onChange={date => setStartDate(date)}
-				onFocus={() => {
-					setIsFocus(true)
+				selected={parsedDate}
+				onChange={date => {
+					if (date) {
+						onChange(date.toISOString())
+					}
 				}}
-				onBlur={() => {
-					setIsFocus(false)
-				}}
+				onFocus={() => setIsFocus(true)}
+				onBlur={() => setIsFocus(false)}
+				dateFormat='yyyy-MM-dd'
 			/>
 			<img className='image' src={calendar} alt='calendar' />
 		</div>

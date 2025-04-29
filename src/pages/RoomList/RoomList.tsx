@@ -31,7 +31,7 @@ export const RoomList: React.FC = () => {
 	return (
 		<>
 			<div>
-				{rooms.map(room => (
+				{testRoomSet.map(room => (
 					<RoomCard
 						key={room.id}
 						image={room.Image}

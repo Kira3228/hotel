@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { InputDate } from '../InputDate/InputDate'
+
 import './SearchPanel.scss'
-import { Button } from '../Button/Button'
-import { AutoCompleteInput } from '../AutocompliteInput/AutoCompliteImput'
+
 import { useDispatch } from 'react-redux'
 import { AppDispatch } from '../../store/store'
 import { useNavigate } from 'react-router-dom'
 import { setSearchData } from '../../store/searchSlice'
+import { Button } from '../../components/Button/Button'
+import { InputDate } from '../../components/InputDate/InputDate'
+import { AutoCompleteInput } from '../../components/AutocompliteInput/AutoCompliteImput'
 
 type SearchPanelProps = {
 	initialData?: {

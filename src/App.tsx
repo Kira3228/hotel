@@ -7,6 +7,8 @@ import { RegisterPage } from './pages/RegisterPage/RegisterPage'
 import { Layout } from './components/Layout/Layout'
 import { LoginPage } from './pages/LoginPage/LoginPage'
 import { RoomList } from './pages/RoomList/RoomList'
+import RoomPage from './pages/RoomPage/RoomPage'
+import { BookingPage } from './pages/BookingPage/BookingPage'
 
 const App: React.FC = () => {
 	return (
@@ -30,15 +32,37 @@ const App: React.FC = () => {
 					}
 				/>
 				<Route
-				path='login'
-				element ={
-					<Layout>
-						<LoginPage/>
-					</Layout>
-				}/>
+					path='login'
+					element={
+						<Layout>
+							<LoginPage />
+						</Layout>
+					}
+				/>
 				<Route
-				path='room-list'
-				element = {<RoomList/>}/>
+					path='room-list'
+					element={
+						<Layout>
+							<RoomList />
+						</Layout>
+					}
+				/>
+				<Route
+					path='/room-list/room/:id'
+					element={
+						<Layout>
+							<RoomPage />
+						</Layout>
+					}
+				/>
+				<Route
+					path='/booking'
+					element={
+						<Layout>
+							<BookingPage />
+						</Layout>
+					}
+				/>
 			</Routes>
 		</>
 	)

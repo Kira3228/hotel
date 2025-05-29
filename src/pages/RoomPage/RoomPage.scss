@@ -1,0 +1,41 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+
+.room {
+	font-family: 'Montserrat' sans-serif;
+	display: flex;
+	justify-content: space-between;
+	padding: 30px;
+	&__info {
+		.room__info--header {
+			font-weight: bold;
+			font-size: 34px;
+		}
+		.no-flex {
+			display: flex;
+			.room__info--rating {
+				display: block;
+				padding: 6px;
+				font-weight: 400;
+				font-size: 14px;
+				border-radius: 5px;
+				border: 1px solid rgb(30, 145, 182);
+			}
+		}
+	}
+	&__booking {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		
+		.room__booking--price {
+			font-weight: bold;
+			font-size: 32px;
+			color: rgb(30, 145, 182);
+		}
+	}
+}
+
+.image-slider{
+	min-height: 640px;
+}

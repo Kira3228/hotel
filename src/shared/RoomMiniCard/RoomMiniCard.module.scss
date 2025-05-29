@@ -1,0 +1,21 @@
+.card {
+	display: flex;
+	margin: 10px;
+	border-bottom: 1px solid #000;
+    cursor: pointer;
+}
+.image {
+	height: 60px;
+}
+.data{
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+}
+.price{
+    font-weight: 700;
+}
+.name{
+    margin-left: 10px;
+}

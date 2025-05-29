@@ -8,22 +8,22 @@
 	width: 100%;
 	padding: 0 40px 0 40px;
 	box-sizing: border-box;
-	nav{
+
+	nav {
 		display: flex;
-		
 	}
 	&__logo {
 		.name {
 			font-family: 'Montserrat', sans-serif;
 			font-optical-sizing: auto;
-            font-size: 2rem;
+			font-size: 2rem;
 			font-weight: bold;
-            margin-left: 5px;
+			margin-left: 5px;
 		}
-        .blue{
-            padding: 10px;
-            border-radius: 4px;
-        }
+		.blue {
+			padding: 10px;
+			border-radius: 4px;
+		}
 	}
 }
 
@@ -32,4 +32,8 @@
 }
 .none {
 	background-color: vars.$none-color;
+}
+.white {
+	background-color: #fff;
+	color: vars.$primary-color;
 }

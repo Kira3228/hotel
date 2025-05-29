@@ -1,5 +1,6 @@
-import { Header } from '../../components/Header/Header'
-import { SearchPanel } from '../../components/SearchPanel/SearchPanel'
+
+import { SearchPanel } from '../../shared/SearchPanel/SearchPanel'
+
 
 import './MainPage.scss'
 

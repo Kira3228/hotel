@@ -1,0 +1,59 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat:100,200,300,regular,500,600,700,800,900,100italic,200italic,300italic,italic,500italic,600italic,700italic,800italic,900italic);
+.card__image {
+  height: 345px;
+  width: 345px;
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  box-shadow: 0px 0px 37px -4px rgba(34, 60, 80, 0.64);
+  margin: 60px;
+  border-radius: 25px;
+  overflow: hidden;
+  width: 1000px;
+}
+.card .card__info {
+  font-family: "Montserrat", sans-serif;
+  padding: 20px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.card .card__info .card__info-text .card__info-name {
+  font-size: 28px;
+  font-weight: bold;
+}
+.card .card__info .card__buttons {
+  border-top: #c4c4c4 1px solid;
+  display: flex;
+  gap: 25px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.heart {
+  fill: #fff;
+}
+
+.favorite {
+  border: #1e91b6 1px solid;
+  height: 48px;
+  width: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.favorite:hover {
+  background-color: #dadada;
+}
+
+.liked {
+  background-color: #1e91b6;
+}
+.liked .heart {
+  fill: #fff;
+}/*# sourceMappingURL=RoomCard.css.map */

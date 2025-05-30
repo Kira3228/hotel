@@ -39,9 +39,7 @@ const RoomPage = () => {
 	if (error || !roomData) {
 		return <p>Ошибка загрузки данных</p>
 	}
-	const bookingClick = () => {
-
-	}
+	const bookingClick = () => {}
 
 	return (
 		<>
@@ -60,7 +58,12 @@ const RoomPage = () => {
 					<p className='room__booking--price'>
 						Цена: {roomData.price || 'Не указана'}
 					</p>
-					<Button onClick={()=>navigate('/booking')} type='button' color='blue' size='exstra-small'>
+					<Button
+						onClick={() => navigate(`/booking/${roomData.id}`)}
+						type='button'
+						color='blue'
+						size='exstra-small'
+					>
 						Забронировать
 					</Button>
 				</div>

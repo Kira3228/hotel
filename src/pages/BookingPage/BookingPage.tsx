@@ -5,7 +5,7 @@ import { RootState } from '../../store/store'
 import { useAuth } from '../../Context/AuthContext'
 import { FormDate } from './formDate'
 import { useFetch } from '../../Hooks/useFetch'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { RoomResponseDto } from '../../types/dto/RoomResponse.dto'
 import { useState } from 'react'
 export const BookingPage: React.FC = () => {
@@ -40,6 +40,36 @@ export const BookingPage: React.FC = () => {
 			[name]: value,
 		}))
 	}
+	const navigate = useNavigate()
+	const handleSubmitCardData = async (e: React.FormEvent) => {
+		e.preventDefault()
+		if (!isAuth) {
+			navigate('/login')
+		}
+		const bookingData = {
+			roomId: id,
+			checkIn: startDate,
+			checkOut: endDate,
+
+
+		}
+		try {
+			const response = await fetch('http://localhost:3000/bookings', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'Authorization': `Bearer ${localStorage.getItem('token')}`
+				},
+				body: JSON.stringify(bookingData)
+			})
+
+		}
+		catch { }
+	}
+
+
+
+
 	return (
 		<div className={styles.bookingPage}>
 			<div className={styles.bookingInfoCard}>

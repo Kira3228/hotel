@@ -5,28 +5,47 @@ import { Button } from '../../components/Button/Button'
 import './RoomPage.scss'
 import { ImageSlider } from '../../shared/ImageSlider/ImageSlider'
 import { AvalibleRooms } from '../../shared/AvalibleRooms/AvalibleRooms'
+import { testRooms } from '../../DevData/Rooms'
 
 const RoomPage = () => {
 	const { id } = useParams<{ id: string }>()
-	const [roomData, setRoomData] = useState<RoomResponseDto | null>(null)
+	const [roomData, setRoomData] = useState<RoomResponseDto>()
 	const [isLoading, setIsLoading] = useState(true)
 	const [error, setError] = useState(false)
+	const room = testRooms.find(r => r.id === Number(id))
+
 	const navigate = useNavigate()
 	useEffect(() => {
 		const fetchRoom = async () => {
+			setRoomData(room)
 			setIsLoading(true)
 			setError(false)
-			try {
-				const response = await fetch(`http://localhost:3000/rooms/room/${id}`)
-				if (!response.ok) throw new Error('Ошибка запроса')
-				const data: RoomResponseDto = await response.json()
-				setRoomData(data)
-			} catch (error) {
-				console.error('Ошибка загрузки:', error)
-				setError(true)
-			} finally {
-				setIsLoading(false)
-			}
+			setTimeout(()=>{
+				try{
+					const foundRoom = testRooms.find(r => r.id === Number(id))
+					if (!foundRoom){
+						throw new Error(`не найдена`)
+					}
+					setRoomData(foundRoom)
+				}
+				catch (err) {
+                    setError(true)
+                }
+				finally{
+					setIsLoading(false)
+				}
+			},500)
+			// try {
+			// 	const response = await fetch(`http://localhost:3000/rooms/room/${id}`)
+			// 	if (!response.ok) throw new Error('Ошибка запроса')
+			// 	const data: RoomResponseDto = await response.json()
+			// 	setRoomData(data)
+			// } catch (error) {
+			// 	console.error('Ошибка загрузки:', error)
+			// 	setError(true)
+			// } finally {
+			// 	setIsLoading(false)
+			// }
 		}
 
 		fetchRoom()
@@ -39,7 +58,7 @@ const RoomPage = () => {
 	if (error || !roomData) {
 		return <p>Ошибка загрузки данных</p>
 	}
-	const bookingClick = () => {}
+	const bookingClick = () => { }
 
 	return (
 		<>

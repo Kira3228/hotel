@@ -11,6 +11,7 @@ import RangeSlider from '../../components/DoubleSlider/DoubleSlider'
 import { RadioButton, RadioButtonChangeEvent } from 'primereact/radiobutton'
 import { Filters } from '../../shared/Filters/Filters'
 import { useNavigate } from 'react-router-dom'
+import { testRooms } from '../../DevData/Rooms'
 
 export const RoomList: React.FC = () => {
 	const [rooms, setRooms] = useState<RoomResponseDto[]>([])
@@ -22,6 +23,7 @@ export const RoomList: React.FC = () => {
 	// })
 	useEffect(() => {
 		try {
+			setRooms(testRooms)
 			const fetchRooms = async () => {
 				const response = await fetch('http://localhost:3000/rooms/get-all')
 				const data = await response.json()

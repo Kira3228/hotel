@@ -7,7 +7,6 @@ export type RoomResponseDto = {
 	status: string
 	area: number
 	Image: ImageType[]
-
 }
 export type ReviewType = { 
 	id: number,

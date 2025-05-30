@@ -12,9 +12,8 @@ type HeaderType = {
 export const Header: React.FC<HeaderType> = ({ className, isTransparent }) => {
 	const navigate = useNavigate()
 	const { isAuth, logout } = useAuth()
-	const combinedClassName = `header ${
-		isTransparent ? 'none' : 'blue'
-	} ${className}`
+	const combinedClassName = `header ${isTransparent ? 'none' : 'blue'
+		} ${className}`
 
 	const handleLogout = () => {
 		logout() // обновляет isAuth в context
@@ -35,14 +34,18 @@ export const Header: React.FC<HeaderType> = ({ className, isTransparent }) => {
 					<Button type='button' color={'none'} className='name' size='medium'>
 						About Us
 					</Button>
-					<Button type='button' color={'none'} className='name' size='medium'>
-						Contact Us
-					</Button>
+					<Link to={'/account'}>
+						<Button type='button' color={'none'} className='name' size='medium'>
+							Contact Us
+						</Button>
+					</Link>
 
 					{isAuth ? (
-						<Button type='button' color='blue' size='medium'>
-							Личный кабинет
-						</Button>
+						<Link to={'/account'}>
+							<Button type='button' color='blue' size='medium'>
+								Личный кабинет
+							</Button>
+						</Link>
 					) : (
 						<Link to='login'>
 							<Button type='button' color='none' size='medium'>

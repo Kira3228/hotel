@@ -1,3 +1,14 @@
 .icon{ 
     max-width: 50px;
+    gap: 50px
+}
+.main{
+    display: flex;
+    justify-content: space-evenly;
+    .nav{
+        width: 40%;
+    }
+}
+.outlet{
+    min-width: 40%;
 }

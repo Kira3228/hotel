@@ -9,7 +9,7 @@ import { LoginPage } from './pages/LoginPage/LoginPage'
 import { RoomList } from './pages/RoomList/RoomList'
 import RoomPage from './pages/RoomPage/RoomPage'
 import { BookingPage } from './pages/BookingPage/BookingPage'
-import { PersonalAccount } from './shared/PersonalAccountLayout/PersonalAccount'
+import { PersonalAccountLayout } from './shared/PersonalAccountLayout/PersonalAccount'
 
 const App: React.FC = () => {
 	return (
@@ -66,7 +66,9 @@ const App: React.FC = () => {
 				/>
 				<Route path='/account'
 					element={<Layout>
-						<PersonalAccount />
+						<PersonalAccountLayout>
+							asd
+						</PersonalAccountLayout>
 					</Layout>} />
 			</Routes>
 		</>

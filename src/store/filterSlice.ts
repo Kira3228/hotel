@@ -1,29 +1,40 @@
-// store/searchSlice.ts
+// store/filterSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export interface SearchData {
-	place: string
-	startDate: string
-	endDate: string
+interface FilterState {
+	rating: string
+	capacity: string
+	isAvailable: boolean
 }
 
-const initialState: SearchData = {
-	place: '',
-	startDate: '',
-	endDate: '',
+const initialState: FilterState = {
+	rating: '',
+	capacity: '',
+	isAvailable: false,
 }
 
-const searchSlice = createSlice({
-	name: 'search',
+export const filterSlice = createSlice({
+	name: 'filter',
 	initialState,
 	reducers: {
-		setSearchData: (state, action: PayloadAction<SearchData>) => {
-			state.place = action.payload.place
-			state.startDate = action.payload.startDate
-			state.endDate = action.payload.endDate
+		setRating: (state, action: PayloadAction<string>) => {
+			state.rating = action.payload
+		},
+		setCapacity: (state, action: PayloadAction<string>) => {
+			state.capacity = action.payload
+		},
+		setIsAvailable: (state, action: PayloadAction<boolean>) => {
+			state.isAvailable = action.payload
+		},
+		resetFilters: state => {
+			state.rating = ''
+			state.capacity = ''
+			state.isAvailable = false
 		},
 	},
 })
 
-export const { setSearchData } = searchSlice.actions
-export default searchSlice.reducer
+export const { setRating, setCapacity, setIsAvailable, resetFilters } =
+	filterSlice.actions
+
+export default filterSlice.reducer

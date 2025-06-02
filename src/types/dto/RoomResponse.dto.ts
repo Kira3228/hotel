@@ -5,6 +5,7 @@ export type RoomResponseDto = {
 	capacity: number
 	price: string
 	status: string
+	rating: number
 	area: number
 	Image: ImageType[]
 	Booking: Booking[]

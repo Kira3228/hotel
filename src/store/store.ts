@@ -5,7 +5,7 @@ import storage from 'redux-persist/lib/storage' // по умолчанию local
 import searchReducer from './searchSlice'
 import { combineReducers } from 'redux'
 import isBookedReduser from './bookedSlice'
-
+import filterReducer from './filterSlice'
 // Конфигурация persist для конкретного редьюсера
 const searchPersistConfig = {
 	key: 'search',
@@ -16,10 +16,16 @@ const isBookedPersistConfig = {
 	storage,
 	whitelist: ['isBooked'], // Убедитесь, что ключ состояния указан верно
 }
+const filterPersistConfig = {
+	key: 'filter',
+	storage,
+	whitelist: ['rating', 'capacity', 'isAvailable'],
+}
 
 const rootReducer = combineReducers({
 	search: persistReducer(searchPersistConfig, searchReducer),
 	isBooked: persistReducer(isBookedPersistConfig, isBookedReduser),
+	filter: persistReducer(filterPersistConfig, filterReducer),
 })
 
 export const store = configureStore({

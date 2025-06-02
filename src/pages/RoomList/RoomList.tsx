@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux'
 import { RootState } from '../../store/store'
 import { useEffect, useState } from 'react'
-import { RoomResponseDto } from '../../types/dto/RoomResponse.dto'
+import { Booking, RoomResponseDto } from '../../types/dto/RoomResponse.dto'
 import { testRoomSet } from './testRoomSet'
 import './RoomList.scss'
 import { SearchPanel } from '../../shared/SearchPanel/SearchPanel'
@@ -18,17 +18,32 @@ export const RoomList: React.FC = () => {
 	const [isLoading, setIsLoading] = useState<boolean>(true)
 	const navigate = useNavigate()
 
-	// const { place, startDate, endDate } = useSelector((state: RootState) => {
-	// 	return state.search
-	// })
+	const {  startDate, endDate } = useSelector((state: RootState) => {
+		return state.search
+	})
+	const getLastBooking = (bookings: Booking[]): Booking | null => {
+		if (bookings.length === 0) return null
+		return bookings.reduce((latest, current) =>
+			new Date(current.endDate) > new Date(latest.endDate) ? current : latest
+		)
+	}
+	const isAvailable = (bookings: Booking[]) => {
+		const lastBooking = getLastBooking(bookings)
+		if (!lastBooking) return true // если нет бронирований — доступна
+		return new Date(startDate) >= new Date(lastBooking.endDate)
+	}
 	useEffect(() => {
 		try {
-			setRooms(testRooms)
+			// setRooms(testRooms)
 			const fetchRooms = async () => {
 				const response = await fetch('http://localhost:3000/rooms/get-all')
-				const data = await response.json()
-				setRooms(data)
-				console.log(data)
+				const data: RoomResponseDto[] = await response.json()
+				if (showAllRooms) {
+					setRooms(data)
+				} else {
+					const availableRooms = data.filter(room => isAvailable(room.Booking))
+					setRooms(availableRooms)
+				}
 			}
 			setIsLoading(false)
 			fetchRooms()

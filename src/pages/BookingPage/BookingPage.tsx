@@ -1,29 +1,25 @@
 import { Button, Card, Input, Typography } from '@mui/joy'
 import styles from './BookingPage.module.scss'
-import { useSelector } from 'react-redux'
-import { RootState } from '../../store/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '../../store/store'
 import { useAuth } from '../../Context/AuthContext'
 import { FormDate } from './formDate'
 import { useFetch } from '../../Hooks/useFetch'
 import { useNavigate, useParams } from 'react-router-dom'
 import { RoomResponseDto } from '../../types/dto/RoomResponse.dto'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import { setIsBooked } from '../../store/bookedSlice'
+
 export const BookingPage: React.FC = () => {
+	const dispatch = useDispatch<AppDispatch>()
+	const { isAuth } = useAuth()
+	const { id } = useParams<{ id: string }>()
 	const { startDate, endDate } = useSelector((state: RootState) => {
 		return state.search
 	})
-	const { isAuth } = useAuth()
-	const {
-		checkInDayName,
-		checkInDay,
-		checkInMonth,
-		checkOutDay,
-		checkOutDayName,
-		checkOutMonth,
-		diffDays,
-	} = FormDate(startDate, endDate)
-	const { id } = useParams<{ id: string }>()
-
+	const isBooked = useSelector(
+		(state: RootState) => state.isBooked[Number(id)] || false
+	)
 	const roomData = useFetch<RoomResponseDto>(
 		id ? `http://localhost:3000/rooms/room/${id}` : ''
 	)
@@ -33,6 +29,20 @@ export const BookingPage: React.FC = () => {
 		cardYear: '',
 		cvv: '',
 	})
+	const [localIsBooked, setLocalIsBooked] = useState(false)
+
+
+	const navigate = useNavigate()
+	const {
+		checkInDayName,
+		checkInDay,
+		checkInMonth,
+		checkOutDay,
+		checkOutDayName,
+		checkOutMonth,
+		diffDays,
+	} = FormDate(startDate, endDate)
+
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target
 		setCardData(prev => ({
@@ -40,35 +50,48 @@ export const BookingPage: React.FC = () => {
 			[name]: value,
 		}))
 	}
-	const navigate = useNavigate()
+
 	const handleSubmitCardData = async (e: React.FormEvent) => {
 		e.preventDefault()
 		if (!isAuth) {
 			navigate('/login')
+			return
 		}
+
+		const token = localStorage.getItem('access_token')
+		if (!token) {
+			navigate('/login')
+			return
+		}
+
 		const bookingData = {
-			roomId: id,
-			checkIn: startDate,
-			checkOut: endDate,
-
-
+			roomId: Number(id),
+			startDate: new Date(startDate).toISOString(),
+			endDate: new Date(endDate).toISOString(),
 		}
+
 		try {
-			const response = await fetch('http://localhost:3000/bookings', {
+			const response = await fetch('http://localhost:3000/booking/create', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
-					'Authorization': `Bearer ${localStorage.getItem('token')}`
+					Authorization: `Bearer ${token}`,
 				},
-				body: JSON.stringify(bookingData)
+				body: JSON.stringify(bookingData),
 			})
-
+			if (!response.ok) {
+				throw new Error('Ошибка бронирования')
+			}
+			const data = await response.json()
+			dispatch(setIsBooked({ roomId: Number(id), isBooked: true }))
+			setLocalIsBooked(true)
+			console.log('Booking created:', data)
+			console.log(isBooked)
+			// Навигация или сообщение об успехе
+		} catch (error) {
+			console.error('Ошибка:', error)
 		}
-		catch { }
 	}
-
-
-
 
 	return (
 		<div className={styles.bookingPage}>
@@ -96,7 +119,7 @@ export const BookingPage: React.FC = () => {
 				<Card>
 					<div className={styles.cardData}>
 						<Typography level={'h4'}>Заполните данные</Typography>
-						<form className={styles.cardForm}>
+						<form onSubmit={handleSubmitCardData} className={styles.cardForm}>
 							<Input
 								placeholder='Номер карты'
 								name='cardNumber'
@@ -123,7 +146,11 @@ export const BookingPage: React.FC = () => {
 								value={cardData.cvv}
 								onChange={handleChange}
 							/>
-							<Button type='submit'>Забронировать</Button>
+							<Button disabled={isBooked || localIsBooked} type='submit'>
+								{isBooked || localIsBooked
+									? 'Уже забронировано'
+									: 'Забронировать'}
+							</Button>
 						</form>
 					</div>
 				</Card>

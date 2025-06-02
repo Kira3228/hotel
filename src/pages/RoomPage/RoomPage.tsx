@@ -1,22 +1,33 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { RoomResponseDto } from '../../types/dto/RoomResponse.dto'
-import { Button } from '../../components/Button/Button'
+
 import './RoomPage.scss'
 import { ImageSlider } from '../../shared/ImageSlider/ImageSlider'
 import { AvalibleRooms } from '../../shared/AvalibleRooms/AvalibleRooms'
+import { testRooms } from '../../DevData/Rooms'
+import { Button } from '@mui/joy'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { AppDispatch, RootState } from '../../store/store'
+import { setIsBooked } from '../../store/bookedSlice'
 
 const RoomPage = () => {
 	const { id } = useParams<{ id: string }>()
-	const [roomData, setRoomData] = useState<RoomResponseDto | null>(null)
+	const dispatch = useDispatch<AppDispatch>()
+	const [roomData, setRoomData] = useState<RoomResponseDto>()
 	const [isLoading, setIsLoading] = useState(true)
 	const [error, setError] = useState(false)
+	const isBooked = useSelector(
+		(state: RootState) => state.isBooked[Number(id)] || false
+	)
+	const room = testRooms.find(r => r.id === Number(id))
+
 	const navigate = useNavigate()
 	useEffect(() => {
 		const fetchRoom = async () => {
-			setIsLoading(true)
-			setError(false)
 			try {
+				// Не сбрасываем состояние бронирования здесь!
 				const response = await fetch(`http://localhost:3000/rooms/room/${id}`)
 				if (!response.ok) throw new Error('Ошибка запроса')
 				const data: RoomResponseDto = await response.json()
@@ -39,9 +50,7 @@ const RoomPage = () => {
 	if (error || !roomData) {
 		return <p>Ошибка загрузки данных</p>
 	}
-	const bookingClick = () => {
-
-	}
+	const bookingClick = () => {}
 
 	return (
 		<>
@@ -60,7 +69,19 @@ const RoomPage = () => {
 					<p className='room__booking--price'>
 						Цена: {roomData.price || 'Не указана'}
 					</p>
-					<Button onClick={()=>navigate('/booking')} type='button' color='blue' size='exstra-small'>
+					{/* <Button
+						onClick={() => navigate(`/booking/${roomData.id}`)}
+						type='button'
+						color='blue'
+						size='exstra-small'
+					>
+						Забронировать
+					</Button> */}
+					<Button
+						disabled={isBooked}
+						onClick={() => navigate(`/booking/${roomData.id}`)}
+						size='lg'
+					>
 						Забронировать
 					</Button>
 				</div>

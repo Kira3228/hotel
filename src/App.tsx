@@ -9,61 +9,64 @@ import { LoginPage } from './pages/LoginPage/LoginPage'
 import { RoomList } from './pages/RoomList/RoomList'
 import RoomPage from './pages/RoomPage/RoomPage'
 import { BookingPage } from './pages/BookingPage/BookingPage'
+import { AuthProvider } from './Context/AuthContext'
 
 const App: React.FC = () => {
 	return (
 		<>
-			<Routes>
-				<Route
-					path='/'
-					element={
-						<Layout>
-							<MainPage />
-							{/* <RoomList/> */}
-						</Layout>
-					}
-				></Route>
-				<Route
-					path='registration'
-					element={
-						<Layout>
-							<RegisterPage />
-						</Layout>
-					}
-				/>
-				<Route
-					path='login'
-					element={
-						<Layout>
-							<LoginPage />
-						</Layout>
-					}
-				/>
-				<Route
-					path='room-list'
-					element={
-						<Layout>
-							<RoomList />
-						</Layout>
-					}
-				/>
-				<Route
-					path='/room-list/room/:id'
-					element={
-						<Layout>
-							<RoomPage />
-						</Layout>
-					}
-				/>
-				<Route
-					path='/booking'
-					element={
-						<Layout>
-							<BookingPage />
-						</Layout>
-					}
-				/>
-			</Routes>
+			<AuthProvider>
+				<Routes>
+					<Route
+						path='/'
+						element={
+							<Layout>
+								<MainPage />
+								{/* <RoomList/> */}
+							</Layout>
+						}
+					></Route>
+					<Route
+						path='registration'
+						element={
+							<Layout>
+								<RegisterPage />
+							</Layout>
+						}
+					/>
+					<Route
+						path='login'
+						element={
+							<Layout>
+								<LoginPage />
+							</Layout>
+						}
+					/>
+					<Route
+						path='room-list'
+						element={
+							<Layout>
+								<RoomList />
+							</Layout>
+						}
+					/>
+					<Route
+						path='/room-list/room/:id'
+						element={
+							<Layout>
+								<RoomPage />
+							</Layout>
+						}
+					/>
+					<Route
+						path='/booking/:id'
+						element={
+							<Layout>
+								<BookingPage />
+							</Layout>
+						}
+					/>
+				</Routes>
+			</AuthProvider>
 		</>
 	)
 }

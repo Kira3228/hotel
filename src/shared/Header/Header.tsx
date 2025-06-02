@@ -44,7 +44,7 @@ export const Header: React.FC<HeaderType> = ({ className, isTransparent }) => {
 							Личный кабинет
 						</Button>
 					) : (
-						<Link to='login'>
+						<Link to='/login'>
 							<Button type='button' color='none' size='medium'>
 								Log In
 							</Button>
@@ -61,8 +61,12 @@ export const Header: React.FC<HeaderType> = ({ className, isTransparent }) => {
 							Выйти
 						</Button>
 					) : (
-						<Link to='registration'>
-							<Button type='button' color={isTransparent ? 'blue' : 'white'} size='medium'>
+						<Link to='/registration'>
+							<Button
+								type='button'
+								color={isTransparent ? 'blue' : 'white'}
+								size='medium'
+							>
 								Sing Up
 							</Button>
 						</Link>

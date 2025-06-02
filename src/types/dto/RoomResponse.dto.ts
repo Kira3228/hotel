@@ -7,7 +7,7 @@ export type RoomResponseDto = {
 	status: string
 	area: number
 	Image: ImageType[]
-
+	Booking: Booking[]
 }
 export type ReviewType = { 
 	id: number,
@@ -21,4 +21,14 @@ export type ImageType = {
 	url: string
 	path: string
 	roomId: number
+}
+export type Booking = {
+	id: number
+	startDate: Date
+	endDate: Date
+	date: Date
+	totalPrice: string
+	status: string
+	roomId: number
+	userId: number
 }

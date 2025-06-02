@@ -1,7 +1,55 @@
+.bookingPage{
+    display: flex;
+    gap: 40px;
+    .bookingInfoCard{
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        width: 70%;
+        .cardData{
+            .cardForm{
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+           .cardDate{
+            display: flex;
+           }
+        }
+    }
+    .bookingResult{
+        width: 30%;
+    }
+}
+.image1{
+    max-width: 100px;
+    width: 100px;
+    height: 100px;
+    
+    box-sizing: border-box;
+}
+.nameImg{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
 .card{
     padding: 40px;
 }
-
+.details{
+    margin-top: 20px;
+}
+.detail{
+    display: flex;
+    justify-content: space-between;
+}
 .content{
     margin: 40px;
+}
+.bookingInfo{
+    display: flex;
+    justify-content: space-between;
+}
+.bookingInfoCard{
+
 }
